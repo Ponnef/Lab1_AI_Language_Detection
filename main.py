@@ -81,6 +81,10 @@ async def predict(request: TextRequest):
         raise HTTPException(status_code=400, detail="Vui lòng nhập văn bản!")
     res = classifier(request.text)
     return {"language": res, "status": "success"}
+    
+import threading
+import uvicorn
+
 def run_server():
     config = uvicorn.Config(app, host="0.0.0.0", port=8000, log_level="info")
     server = uvicorn.Server(config)
