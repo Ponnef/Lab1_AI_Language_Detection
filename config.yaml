@@ -1,0 +1,4 @@
+model_path: "papluca/xlm-roberta-base-language-detection"
+student_info:
+  name: "Nguyễn Huỳnh Gia Bảo"
+  id: "24120264"

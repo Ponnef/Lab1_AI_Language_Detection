@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+torch
+transformers
+omegaconf
+pyyaml
+pinggy
+requests
+sentencepiece
+python-multipart
