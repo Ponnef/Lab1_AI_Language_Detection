@@ -65,7 +65,8 @@ print(response.json())
 {
     "language": "vi",
     "status": "success"
-}```
+}
+```
 * Response mẫu (Lỗi văn bản rỗng):
 ``` bash
 {
