@@ -7,39 +7,31 @@ from pydantic import BaseModel
 from omegaconf import OmegaConf
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-# --- 1. ĐỊNH NGHĨA CLASS MODEL ---
 class LanguageDetection:
     def __init__(self, config_path: str):
-        # Load config từ file yaml
         self.cfg = OmegaConf.load(config_path)
         print(f"Đang tải model từ: {self.cfg.model_path}...")
-        
-        # Khởi tạo Tokenizer và Model
+
         self.tokenizer = AutoTokenizer.from_pretrained(self.cfg.model_path)
         self.model = AutoModelForSequenceClassification.from_pretrained(self.cfg.model_path)
-        print("✅ Model đã sẵn sàng!")
+        print("Model đã sẵn sàng!")
 
     def __call__(self, text: str):
-        # Tiền xử lý đầu vào
         inputs = self.tokenizer(
             text, 
             padding=True, 
             truncation=True, 
             return_tensors="pt"
         )
-        
-        # Dự đoán không tính gradient (giảm bộ nhớ)
+
         with torch.no_grad():
             outputs = self.model(**inputs)
-        
-        # Lấy nhãn ngôn ngữ từ logits
+
         idx = outputs.logits.argmax(-1).item()
         return self.model.config.id2label[idx]
 
-# --- 2. KHỞI TẠO APP & MODEL ---
 app = FastAPI(title="Language Detection API by Bao")
 
-# Cấu hình CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
@@ -48,18 +40,15 @@ app.add_middleware(
     allow_headers=['*'],
 )
 
-# Khởi tạo model (Đảm bảo có file config.yaml cùng thư mục)
 try:
     classifier = LanguageDetection("config.yaml")
 except Exception as e:
-    print(f"❌ Lỗi khi khởi tạo model: {e}")
+    print(f"Lỗi khi khởi tạo model: {e}")
     classifier = None
 
-# Schema cho POST request
 class TextRequest(BaseModel):
     text: str
 
-# --- 3. ĐỊNH NGHĨA CÁC ENDPOINTS ---
 
 @app.get('/')
 async def root():
@@ -99,7 +88,6 @@ async def predict(request: TextRequest):
     res = classifier(request.text)
     return {"language": res, "status": "success"}
 
-# --- 4. CHẠY SERVER ---
 if __name__ == "__main__":
-    # Chạy trực tiếp bằng: python main.py
+    
     uvicorn.run(app, host="0.0.0.0", port=8000)

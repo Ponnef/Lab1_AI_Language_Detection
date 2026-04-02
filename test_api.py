@@ -3,7 +3,7 @@ import requests
 BASE_URL = "http://127.0.0.1:8000"
 
 def test_root():
-    print("--- 1. Kiểm tra Endpoint GET / ---")
+    print("1. Kiểm tra Endpoint GET /")
     try:
         response = requests.get(f"{BASE_URL}/")
         print(f"Status Code: {response.status_code}")
@@ -12,7 +12,7 @@ def test_root():
         print(f"Lỗi: {e}\n")
 
 def test_health():
-    print("--- 2. Kiểm tra Endpoint GET /health ---")
+    print("2. Kiểm tra Endpoint GET /health")
     try:
         response = requests.get(f"{BASE_URL}/health")
         print(f"Status Code: {response.status_code}")
@@ -21,7 +21,7 @@ def test_health():
         print(f"Lỗi: {e}\n")
 
 def test_predict(text_input):
-    print(f"--- 3. Kiểm tra POST /predict với văn bản: '{text_input}' ---")
+    print(f"3. Kiểm tra POST /predict với văn bản: '{text_input}'")
     payload = {"text": text_input}
     try:
         response = requests.post(f"{BASE_URL}/predict", json=payload)
@@ -39,7 +39,7 @@ def test_predict(text_input):
         print(f"Lỗi kết nối: {e}\n")
 
 if __name__ == "__main__":
-    print("🚀 BẮT ĐẦU KIỂM THỬ API - SINH VIÊN: NGUYỄN HUỲNH GIA BẢO\n")
+    print("BẮT ĐẦU KIỂM THỬ API\n")
     
     try:
         test_root()
@@ -51,10 +51,10 @@ if __name__ == "__main__":
         # Test 2: Tiếng Anh
         test_predict("Artificial Intelligence is a very interesting field of study.")
         
-        # Test 3: Trường hợp lỗi (Gửi text rỗng để test xử lý lỗi) [cite: 46]
+        # Test 3: Trường hợp lỗi (Gửi text rỗng để test xử lý lỗi)
         test_predict("   ")
 
     except requests.exceptions.ConnectionError:
-        print("❌ LỖI: Không thể kết nối đến Server. Bảo nhớ chạy file main.py trước nhé!")
+        print("LỖI: Không thể kết nối đến Server")
     
-    print("--- HOÀN TẤT KIỂM THỬ ---")
+    print("HOÀN TẤT")
