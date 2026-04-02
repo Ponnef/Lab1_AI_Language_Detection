@@ -65,3 +65,9 @@ tzdata==2025.3
 urllib3==2.6.3
 watchdog==6.0.0
 wcwidth==0.6.0
+transformers>=4.40.0
+torch>=2.0.0
+fastapi>=0.100.0
+uvicorn>=0.20.0
+pyyaml>=6.0
+omegaconf>=2.3.0
