@@ -77,16 +77,17 @@ async def classify_get(message: str):
 
 @app.post('/predict')
 async def predict(request: TextRequest):
-    """Cổng nộp bài chính thức qua POST"""
     if not request.text.strip():
         raise HTTPException(status_code=400, detail="Vui lòng nhập văn bản!")
-    
-    if classifier is None:
-        raise HTTPException(status_code=500, detail="Model server error")
-
     res = classifier(request.text)
     return {"language": res, "status": "success"}
+def run_server():
+    config = uvicorn.Config(app, host="0.0.0.0", port=8000, log_level="info")
+    server = uvicorn.Server(config)
+    server.run()
 
-if __name__ == "__main__":
-    
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+thread = threading.Thread(target=run_server, daemon=True)
+thread.start()
+
+print("Server started on http://127.0.0.1:8000")
+
