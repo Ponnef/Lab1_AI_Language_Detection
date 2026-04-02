@@ -63,7 +63,6 @@ async def health():
 
 @app.get('/classify')
 async def classify_get(message: str):
-    """Sử dụng cho link Pinggy hoặc gọi nhanh qua trình duyệt"""
     if not message or not message.strip():
         raise HTTPException(status_code=400, detail="Message không được để trống!")
     
