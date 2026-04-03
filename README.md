@@ -64,6 +64,7 @@ url = "http://127.0.0.1:8000/classify"
 payload = {"message": "hello baby"}
 response = requests.get(url, params=payload)
 response.json()
+```
 * Response mẫu:
 ``` bash
 {
