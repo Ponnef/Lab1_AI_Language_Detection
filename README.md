@@ -23,7 +23,10 @@ pip install -r requirements.txt
 uvicorn main:app --host 127.0.0.1 --port 8000 --reload
 ```
 3. Sau khi chạy lệnh này, server sẽ bắt đầu lắng nghe tại địa chỉ http://127.0.0.1:8000.
-4. lên web nhập: 127.0.0.1:8000/docs
+4. lên web nhập:
+``` bash
+127.0.0.1:8000/docs
+```
 ### Hướng dẫn gọi API và ví dụ request/response
 1. Get / (root)
 *  Chức năng: Trả về thông tin giới thiệu và thông tin sinh viên.
