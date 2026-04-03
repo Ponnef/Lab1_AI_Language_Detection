@@ -26,6 +26,13 @@ uvicorn main:app --host 127.0.0.1 --port 8000 --reload
 ### Hướng dẫn gọi API và ví dụ request/response
 1. Get / (root)
 *  Chức năng: Trả về thông tin giới thiệu và thông tin sinh viên.
+*  Request mẫu:
+``` bash
+import requests
+url = "http://127.0.0.1:8000/"
+response = requests.get(url)
+print(response.json())
+```
 *  Response mẫu:
 ```bash
 {
@@ -35,6 +42,13 @@ uvicorn main:app --host 127.0.0.1 --port 8000 --reload
 ```
 2. Get /health
 * Chức năng: Kiểm tra trạng thái hoạt động của server.
+* Resquest mẫu:
+``` bash
+import requests
+url = "http://127.0.0.1:8000/health"
+response = requests.get(url)
+response.json()
+```
 * Response mẫu:
 ``` bash
 {
@@ -43,7 +57,13 @@ uvicorn main:app --host 127.0.0.1 --port 8000 --reload
 ```
 3.  Get /classify
 * Chức năng: Nhận diện ngôn ngữ nhanh qua tham số message trên URL (thích hợp test nhanh bằng trình duyệt).
-* Request mẫu: http://127.0.0.1:8000/classify?message=Hello world
+* Request mẫu:
+``` bash
+import requests
+url = "http://127.0.0.1:8000/classify"
+payload = {"message": "hello baby"}
+response = requests.get(url, params=payload)
+response.json()
 * Response mẫu:
 ``` bash
 {
