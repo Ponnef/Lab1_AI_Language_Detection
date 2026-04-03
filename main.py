@@ -82,16 +82,14 @@ async def predict(request: TextRequest):
     res = classifier(request.text)
     return {"language": res, "status": "success"}
     
-import threading
-import uvicorn
 
 def run_server():
     config = uvicorn.Config(app, host="0.0.0.0", port=8000, log_level="info")
     server = uvicorn.Server(config)
     server.run()
 
-thread = threading.Thread(target=run_server, daemon=True)
-thread.start()
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
 
 print("Server started on http://127.0.0.1:8000")
-
