@@ -98,6 +98,6 @@ print(response.json())
     "detail": "Vui lòng nhập văn bản!"
 }
 ```
-### **🎥 Video demo**
-[videodemo.zip](https://github.com/user-attachments/files/26485622/videodemo.zip)
+### **(https://github.com/user-attachments/files/26485622/videodemo.zip)🎥 Video demo**
+
 
